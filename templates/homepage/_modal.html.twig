@@ -1,0 +1,21 @@
+{# <!-- Modal d'affichage du contenu d'une news : appel via js par la class="displayNews" --> #}
+<div class="modal fade" id="displayNewsModal" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content news_modal">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto">Infos Club</h5>
+            </div>
+            <div class="modal-body">
+                {% for news_index in news %}
+                <li>
+                    <a href="{{ path('news_show', {'id': news_index.id}) }}">
+                    {{ news_index.title }}
+                    </a>
+                    <small>{{ 'le ' ~ news_index.date|date("d/m/Y") }}</small>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+

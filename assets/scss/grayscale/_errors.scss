@@ -1,0 +1,43 @@
+.error-section {
+  min-height: 100vh;
+  padding: 10rem;
+  background: $bg-gradient;
+
+  h1 {
+    font-family: 'Varela Round';
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.8rem;
+    background: -webkit-linear-gradient(fade-out(white, 0.1), fade-out(white, 1));
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  @media(min-width: 768px) {
+    h1 {
+      font-size: 6rem;
+      line-height: 6rem;
+    }
+  }
+
+  @media(min-width: 992px) {
+    h1 {
+      font-size: 8rem;
+      line-height: 8rem;
+      letter-spacing: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

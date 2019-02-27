@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ member.name }}{% endblock %}
+
+{% block page %}
+
+    <!-- User informations Section -->
+    <section class="user-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="mx-auto my-0 text-uppercase mb-5">Profil de {{ member.name }}</h1>
+                    <h2 class="text-primary mb-5">Dashboard</h2>
+                </div>
+
+                <div class="col-lg-6">
+                    <h3 class="text-white mb-5 text-center">Informations personnelles</h3>
+
+                    <div class="list-group mb-5 scrollable-400 black-list text-center">
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Nom : </span>{{ member.name }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Prénom : </span>{{ member.firstname }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Date de naissance : </span>{{ member.birthdate |date("m/d/Y")}}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Adresse : </span>{{ member.address }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Adresse e-mail : </span>{{ member.email }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Numéro de téléphone : </span>{{ member.phone }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0"><span class="text-primary">Numéro de licence : </span>{{ member.license }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="text-white mb-5 text-center">Niveau technique</h3>
+                    <div class="list-group mb-5 scrollable-400 black-list text-center">
+                        <div class="list-group-item">
+                            <p class="m-0">
+                            <span class="text-primary">Mon grade : </span>
+                            {% for grade in member.grades %}
+                                {{ grade.name }}
+                            {% endfor %}
+                            </p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0">
+                            <span class="text-primary">Technique(s) à travailler : </span>
+                                <div class="row d-flex flex-row justify-content-center mt-2 mb-n3">
+                                    {% for technic in member.technics %}
+                                        <div class="col-sm-2 badge badge-primary m-2 p-2">{{ technic.attack }}<br>{{ technic.title }}<br>{{ technic.side }}</div>
+                                    {% endfor %}
+                                </div>
+                            </p>
+                        </div>
+                        <div class="list-group-item">
+                            <p class="m-0">
+                            <span class="text-primary">Commentaire d'un professeur : </span>{{ member.teacherComment }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class ="mx-auto text-center mb-5">
+                        <a href="{{ path('teacher_member_edit', {"id" : member.id}) }}" class="btn btn-primary mx-auto">Modifier la fiche de progression</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="{{ path('teacher_index') }}">Retour</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

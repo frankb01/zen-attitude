@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary mt-5">Enregistrer</button>
+{{ form_end(form) }}
+
+    <div class="mt-5">
+        <a href="{{ path('gallery_index') }}">Retour</a>
+    </div>

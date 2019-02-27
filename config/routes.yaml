@@ -1,0 +1,2 @@
+logout:
+    path: /logout # route de déconnexion : à définir ici pour utilisation dans security.yaml

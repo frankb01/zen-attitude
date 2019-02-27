@@ -1,0 +1,49 @@
+.stages-section {
+    min-height: 100vh;
+    padding: 10rem 0;
+    background: $bg-gradient;
+    
+    h1 {
+        font-family: 'Varela Round';
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        letter-spacing: 0.8rem;
+        background: -webkit-linear-gradient(fade-out(white, 0.1), fade-out(white, 1));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        padding-bottom: 2rem;
+    }
+
+    .toggle {
+        margin-bottom: 2rem;
+    }
+
+    .black-list {
+        a {
+            background-color: transparent;
+            color: $white;
+            border-top: 1px solid #fff;
+            border-radius: 0;
+
+            &:hover {
+                background-color: $primary;
+                color: $white;
+
+                div.d-flex {
+                    h5{
+                        color: $white;
+                    }
+                }
+            }
+
+            div.d-flex {
+                flex-direction: column;
+
+                h5{
+                    color: $primary;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

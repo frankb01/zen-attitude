@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Stages{% endblock %}
+
+{% block page %}
+
+<!-- Stages Section -->
+<section id="stages" class="stages-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                {# Titre de la page #}
+                <h1 class="mx-auto my-0 text-uppercase">Les stages</h1>
+                <h2 class="text-primary mb-5">Consulter les stages du club ou<br>Avoir la liste des stages nationaux</h2>
+
+                {# Bouton choix stage intern ou extern #}
+                <input id="stages-toggle" type="checkbox" checked data-toggle="toggle" data-on="<h6 class='ml-n4'>Interne au club</h6>" data-off="<h6 class='ml-4'>National</h6>" data-onstyle="primary" data-offstyle="primary"  data-width="300" data-height="55">
+                <br>
+
+                {# Bouton de filtrage si stage externe choisis #}
+                <div id="stages-extern-filter">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filtre-animateur1" class="text-white">Animateur</label>
+                                <input id="filtre-animateur1" class="form-control" type="text" placeholder="Animateur">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filtre-date" class="text-white">Date</label>
+                                <input id="filtre-date" class="form-control" type="text" placeholder="Date">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="filtre-place" class="text-white">Ville</label>
+                                <input id="filtre-place" class="form-control" type="text" placeholder="Ville">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <button type="button" id="filtre-suggest" class="btn-primary btn-sm">
+                                    <i class='fas fa-user-ninja fa-2x mt-2'></i>
+                                    <br>
+                                    <span class="my-2">filtrer par stages suggérés</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {# Les liste des stage #}
+                <div id="list-stages" class="list-group scrollable-400 black-list">
+                    {% for stage in stages %}
+                        <a {{ (stage.poster ? 'href=' ~ asset(media_upload_path ~ stage.poster) ~ ' target="_blank"' : 'href=#') }} class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ stage.name }}</h5>
+                                <small>{{ stage.date|date('d/m/Y') }}</small>
+                                <small class="stage-place">{{ stage.place }}</small>
+                            </div>                        
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {# on passe le path dans une variable js pour l'utiliser côté js #}
+    <script>var ajaxUrlStagesIntern = "{{ path('stages_intern_ajax')|e('js') }}";</script>
+    <script>var ajaxUrlStagesExtern = "https://api.stages-aikido.fr/stages";</script>
+    <script>var suggestedApiStage =  "{{ suggestedApiStage|json_encode() }}" ;</script>
+    <script>var currentPage = "stage";</script>
+
+    {# On recrée à l'identique le template d'un stage
+       pour pouvoir l'utiliser avec les valeur recuper en ajax via la librairie js Mustache
+       les tags sont identifier à l'aide de trois parenthèses ((( var ))), 
+       normalement mustache utilise les doubles accolades {{ var }} mais cela pose problème à twig 
+       ceci est configuré lors de l'appelle à la methode Mustache.render() avec le 4ème argument tags
+       source: https://www.codereadability.com/constructing-html-with-templates/
+       le & devant le href permet de ne pas eschaper les caractère html, utile pour recuper les / de url générer coté js
+    #}
+    <script id="stage-template" type="text/template">
+        <a id="((( id )))" ((( &href ))) class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">((( name )))</h5>
+                <small class="stage-date">((( date )))</small>
+                <small class="stage-place">((( place )))</small>
+            </div>
+        </a>
+    </script>
+    
+{% endblock %}

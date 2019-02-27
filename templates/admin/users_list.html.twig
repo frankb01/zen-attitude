@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de tous les utilisateurs{% endblock %}
+
+{% block page %}
+
+<section class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto mb-3 text-center">
+                <h1 class="mx-auto my-0 text-uppercase mb-5">Administration</h1>
+                <h2 class="text-primary mb-5">Liste des membres</h2>
+
+                <div class="col-lg-8 mx-auto mb-5">
+                    <div class="btn btn-primary">
+                        <a class="d-flex align-items-center text-white" href="{{ path('admin_user_new') }}">
+                            <p class="m-0 mr-2">Ajouter un membre</p><i class="fas fa-user-plus fa-2x"></i>
+                        </a>
+                </div>
+            </div>
+
+            <div class="col-lg-10 mx-auto text-center mb-5">
+                <div class="col-lg-6 mx-auto">
+                    <div class="form-group">
+                        <label for="search_box" class="text-white">Nom / Prénom / Rôle / Responsabilité</label>
+                        <input id="search_box" class="form-control" type="text" placeholder="Rechercher...">
+                    </div>
+                </div>
+
+                <div class="table-responsive text-white">
+                    <table id="scrollTable" class="text-white">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Rôle sur le site</th>
+                                <th>Responsabilité club</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            {% set currentUserId = user.id %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.role.role }}</td>
+                                <td>{{ user.responsability }}</td>
+                                <td>
+                                    <a href="{{ path('admin_user_edit', {"id" : user.id}) }}">
+                                        <i class="fas fa-user-edit fa-2x text-warning"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                {# la class "confirmDeleteUser" fait référence à du js qui appelle ensuite le modal coorrespondant situé dans le fichier inclus en fin de page #}
+                                    <a class="confirmDeleteUser" href="{{ path('admin_user_delete', {"id" : user.id}) }}" >
+                                        <i class="fas fa-user-times fa-2x text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-lg-10 mx-auto mb-5 text-center">
+                <a href="{{ path('admin_index') }}">Retour</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation de suppression -->
+{% include "_partials/_modal.html.twig" %}
+
+{% endblock %}

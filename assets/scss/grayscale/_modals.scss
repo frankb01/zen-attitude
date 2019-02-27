@@ -1,0 +1,7 @@
+.modal-section {
+    background: linear-gradient(to bottom, $black 0%,#{fade-out($black, .1)} 75%,#{fade-out($black, .2)} 100%);
+    box-shadow: 2px 2px 30px rgb(184, 180, 180);
+    color: #fff;
+    text-align: center;
+    margin: auto;
+}

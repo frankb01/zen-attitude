@@ -1,0 +1,106 @@
+{# On recupère la Route active #}
+{# pour activer ou non la class active, utilisé en dehord de la homepage #}
+{# dans la homepage c'est la fonction js scrollspy() qui fait le job #}
+{% set current_path = app.request.get('_route') %}
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+
+        <a class="navbar-brand js-scroll-trigger" {% if app.request.pathInfo == "/" %} href="#page-top" {% else %} href="{{ path('homepage') }}" {% endif %}>
+        Aïkido Club de Bourg-en-Bresse
+        </a>
+
+        {# Bouton hamburger uniquement pour menu responsive #}
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+
+        {# Contient tous les onglet de la nav #}
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            {# uniquement les sections présentent dans la homepage sont prensent dans ce ul #}
+            <ul id="homepageNav" class="navbar-nav ml-auto d-flex align-items-center">
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'club_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#about' : path('club_index') }}">
+                    <span>Club</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'aikido_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#projects' : path('aikido_index') }}">
+                    <span>Aïkido</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'stage_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#stages' : path('stage_index') }}">
+                    <span>Stages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger" 
+                    href="{{ app.request.pathInfo == "/" ? '#contact' : absolute_url('/#contact') }}">
+                    <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+
+            {# Les autres pages du site non present dans la home page sont dans ce ul #}
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+                {# Si connecté #}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                    <li class="nav-item js-scroll-trigger dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {# Déplacer le bienvenue ? Ou remplacer par photo user ? #}
+                            <span class="pr-2">Bienvenue {{ app.user.name }}</span>
+                            <i class="fas fa-user-circle fa-2x"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            {# Lien vers Mon profile : #}
+                            <a class="dropdown-item" href="{{ path('user_dashboard') }}">Profil</a>
+                            <a class="dropdown-item" href="{{ path('carsharing_index') }}">Co-voiturage</a>
+                            <a class="dropdown-item" href="{{ path('gallery_index') }}">Galerie</a>
+                            {% if is_granted('ROLE_TEACHER') %}
+                            {# Lien vers la classe : #}
+                            <a class="dropdown-item" href="{{ path('teacher_index') }}">Senseï</a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                            {# Lien vers la classe : #}
+                            <a class="dropdown-item" href="{{ path('admin_index') }}">Admin</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('logout')}}">Déconnexion</a>
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link text-white d-flex align-items-center dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><p class="m-0 mr-3">Bienvenue {{ app.user.name }}</p></a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="nav-link js-scroll-trigger text-white drop" href="{{ path('user_dashboard') }}">Profil</a>
+                            <a class="nav-link js-scroll-trigger text-white drop" href="{{ path('logout')}}">Déconnexion</a>
+                        </div>
+                    </li>
+                    <i class="fas fa-user-circle fa-2x text-white"></i> -->
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a 
+                        class="nav-link js-scroll-trigger {{ current_path == 'login' ? 'active' : '' }}" 
+                        href="{{ path('login') }}">
+                        <span>Connexion</span>
+                        </a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+

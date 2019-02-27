@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La classe du Senseï{% endblock %}
+
+{% block page %}
+
+<!-- Members list Section -->
+<section class="teacher-section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 text-center">
+                <h1 class="mx-auto my-0 text-uppercase mb-5">professeur</h1>
+                <h2 class="text-primary mb-5">La classe du Senseï</h2>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="list-member">
+                    <h3 class="text-white mb-5 text-center">Liste des membres du club</h3>
+                    <div class="list-group mb-5 scrollable-400 black-list text-center">
+                        {% for currentUser in usersList %}
+                            <div class="list-group-item">
+                                <div class="d-flex flex-row w-100 justify-content-between">
+                                    <p class="d-flex justify-content-between m-0">
+                                        {{ currentUser.name }} {{ currentUser.firstname }}
+                                    </p>
+                                    <a class="text-warning" href="{{ path('teacher_member_show', {"id" : currentUser.id}) }}">Modifier sa progression</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="stage-teacher">
+                    <h3 class="text-white mb-3 text-center">Liste des Stages</h3>
+
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="row text-center mb-3">
+                                {# Bouton choix stage intern ou extern #}
+                                <div class="col text-center">
+                                    <a id="new-stage" class="btn btn-primary btn-block mb-2" href="{{ path('teacher_stage_new') }}" >Nouveau stage</a>
+                                    <input id="stages-toggle" type="checkbox" checked data-toggle="toggle" data-on="<h6 class='ml-n4'>Interne au club</h6>" data-off="<h6 class='ml-4'>National</h6>" data-onstyle="primary" data-offstyle="primary"  data-width="100%" data-height="60">
+                                </div>
+                            </div>
+                            <div class="list-group mb-5">
+
+                                {# Bouton de filtrage si stage externe choisis #}
+                                <div id="stages-extern-filter" class="text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="filtre-animateur1" class="text-white">Animateur</label>
+                                                <input id="filtre-animateur1" class="form-control" type="text" placeholder="Animateur">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="filtre-date" class="text-white">Date</label>
+                                                <input id="filtre-date" class="form-control" type="text" placeholder="Date">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="filtre-place" class="text-white">Ville</label>
+                                                <input id="filtre-place" class="form-control" type="text" placeholder="Ville">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <button type="button" id="filtre-suggest" class="btn-primary btn-sm">
+                                                    <i class='fas fa-user-ninja fa-2x mt-2'></i>
+                                                    <br>
+                                                    <span class="my-2">filtrer par stages suggérés</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                    
+                                {# Les liste des stage #}
+                                <div id="list-stages" class="list-group scrollable-300 black-list">
+                                    {% for stage in stagesClubList %}
+                                        <div id="{{ stage.id }}" class="list-group-item list-group-item-action  text-center">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">{{ stage.name }}</h5>
+                                                <small>{{ stage.date|date('d/m/Y') }}</small>
+                                                <small class="stage-place mb-1">{{ stage.place }}</small>
+                                                <div class="row stage-item-action">
+                                                    <div class="col">
+                                                        <a class="d-flex text-warning" href="{{ path('teacher_stage_edit', {"id": stage.id}) }}">
+                                                            Modifier
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a class="confirmDeleteStage text-danger" href="{{ path('teacher_stage_delete', {"id": stage.id}) }}" >
+                                                            Supprimer
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>                        
+                                        </div>
+                                    {% else %}
+                                        <div class="list-group-item">Il y a aucun stage interne à venir</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="mt-5 text-center">
+                <a href="{{ path('admin_index') }}">Retour</a>
+        </div>
+        {% endif %}
+    </div>
+
+</section>
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation de suppression -->
+{% include "_partials/_modal.html.twig" %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {# on passe le path dans une variable js pour l'utiliser côté js #}
+    <script>var ajaxUrlStagesIntern = "{{ path('stages_intern_ajax')|e('js') }}";</script>
+    <script>var ajaxUrlStagesExtern = "https://api.stages-aikido.fr/stages";</script>
+    <script>var suggestedApiStage =  "{{ suggestedApiStage|json_encode() }}" ;</script>
+    <script>var currentPage = "teacher";</script>
+    {# je ne sais pas pourquoi mais il fait passer un texte dans le default pour que ca fonctionne #}
+    <script>var teacherToggleInfo = "{{ teacherToggleInfo }}";</script>
+
+
+    {# On recrée à l'identique le template d'un stage
+       pour pouvoir l'utiliser avec les valeur recuper en ajax via la librairie js Mustache
+       les tags sont identifier à l'aide de trois parenthèses ((( var ))), 
+       normalement mustache utilise les doubles accolades {{ var }} mais cela pose problème à twig 
+       ceci est configuré lors de l'appelle à la methode Mustache.render() avec le 4ème argument tags
+       source: https://www.codereadability.com/constructing-html-with-templates/
+    #}
+    <script id="stage-template" type="text/template">
+        <div id="((( id )))" class="list-group-item list-group-item-action text-center">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">((( name )))</h5>
+                <small class="stage-date">((( date )))</small>
+                <small class="stage-place">((( place )))</small>
+                <div class="row stage-item-action">
+                    <a class="d-flex justify-content-end align-items-baseline text-warning" href="((( urlIdApi )))">
+                        Suggérer le stage
+                    </a>
+                </div>
+            </div>                        
+        </div>
+    </script>
+    
+{% endblock %}

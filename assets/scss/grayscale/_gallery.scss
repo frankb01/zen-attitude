@@ -1,0 +1,102 @@
+.gallery-section {
+    min-height: 100vh;
+    padding: 10rem 0;
+    background: linear-gradient(to bottom, $black 0%,#{fade-out($black, .1)} 75%,#{fade-out($black, .2)} 100%);
+    h1 {
+        font-family: 'Varela Round';
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        letter-spacing: 0.8rem;
+        background: -webkit-linear-gradient(fade-out(white, 0.1), fade-out(white, 1));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        text-align: center;
+      }
+    
+    .gallery {
+        width: 50%;
+        margin: auto;
+    }
+    
+    .parent {
+        position: relative;
+        width: 13rem;
+        height: 13rem;
+        margin: 0 auto;
+    }
+    
+    .wrapper {
+        width: 13rem;
+        height: 13rem;
+        cursor: pointer;
+        position: absolute;
+        overflow: hidden;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+        transition: transform 375ms, width 275ms 100ms, height 375ms;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        border: 5px solid #eee;
+        border-radius: 5px;
+    }
+    
+    .wrapper.open {
+        width: 39rem;
+        height: 39rem;
+        transition: transform 375ms, width 375ms, height 275ms 100ms;
+    }
+    
+    .wrapper div.content {
+        position: absolute;
+        margin: auto;
+        left: -99.99%;
+        right: -99.99%;
+        transform-origin: top;
+        width: 39rem;
+        transform: scale(0.62);
+        height: 39rem;
+        border-radius: 3px;
+        background: $bg-gradient;
+        overflow: hidden;
+        transition: transform 375ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+    
+    .wrapper.open .content {
+        transform: scale(1);
+    }
+    
+    .wrapper .img {
+        height: 26rem;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .text {
+        font-size: 1.2rem;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        justify-content: center;
+    }
+    
+
+    .title {
+        text-transform: uppercase;
+        margin-top: 4em;
+    }
+
+    .subtitle {
+        margin: 0.5rem 0;
+        color: $primary;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .red:hover {
+        color: darkred;
+    }
+  }

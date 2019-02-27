@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Co-voiturage{% endblock %}
+
+{% block page %}
+<div class="carsharing-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto mb-5 text-center">
+                {# Titre de la page #}
+                <h1 class="mx-auto mb-5 text-uppercase">Co-voiturage</h1>
+                <h3 class="text-primary mb-5">Vous voulez vous rendre à un stage ?</h3>
+                <h5 class="text-white">Rejoignez un Co-voiturage en cliquant dans la liste ou proposez en un !</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5 black-list">
+                <div class="list-group scrollable-200">
+                {% for carsharing in carsharings %}
+                    <a href="{{ path('carsharing_take', { "id": carsharing.id }) }}" class="list-group-item list-group-item-action text-white">
+                        {{ carsharing.stageApi.date }} pour le stage de <span class="font-weight-bold text-primary">{{ carsharing.stageApi.animator }}</span> : Départ à {{ carsharing.appointmentAt|date('H:i') }}
+                    </a>
+                {% else %}
+                    <div class="list-group text-white">Il y a aucun Co-voiturage de disponible, Créer en un !</div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-8 mx-auto text-center">
+                <a href="{{ path('carsharing_new') }}" class="btn btn-primary">Proposer un Co-voiturage</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation d'inscription à un co-voiturage -->
+{% include "_partials/_modal.html.twig" %}
+
+{% endblock %}

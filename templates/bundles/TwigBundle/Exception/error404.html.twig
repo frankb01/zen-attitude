@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}Erreur 404 - Zen Attitude{% endblock %}
+        </title>
+
+        <!-- Stylesheets -->
+        {# Charge les fichiers css present dans public/build/entrypoints.json 'app' doit correspondre au premier argument de addEntry () dans webpack.config.js #}
+        {{ encore_entry_link_tags('app') }}
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        {% include "_partials/_nav.html.twig" %}
+        
+        <section class="error-section">
+            <h1 class="mx-auto my-0 text-center">404</h1>
+            <h2 class="mx-auto my-0 text-center text-white-50">Impossible d'accéder à cette page</h2>
+            <div class="container mx-auto">
+                <div class="mx-auto d-flex align-items-center">
+                    <img style="background: transparent; border-style: none" alt="image de la page 404" class="img-fluid img-thumbnail rounded mx-2 my-2" src="{{ asset('img/non_transparent.png') }}">
+                    <div class="">
+                        <h2 class="text-white-50 mb-5">
+                            La page demandée est introuvable !</br>
+                            Essaie encore...
+                        </h2>
+                        <blockquote class="blockquote mb-0">
+                            <h5 class="mb-2 text-white">L’échec est la voie du succès. Chaque erreur nous apprend quelque chose.</h5>
+                            <h5 class="blockquote-footer m-0 text-white">Morihei UESHIBA, fondateur de l'Aïkido.</h5>
+                        </blockquote>
+                        <div class="mt-5 text-center">
+                            <a href="{{ path('homepage') }}" class="btn btn-secondary">Retourner en lieu sûr</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        {% include "_partials/_footer.html.twig" %}
+
+        <!-- Javascripts -->
+        {# Contient tout le JavaScript de l'entrée "app" dans public/build/entrypoints.json #}
+        {{ encore_entry_script_tags('app') }}
+    </body>
+</html>

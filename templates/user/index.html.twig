@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block page %}
+
+<section class="user-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="mx-auto my-0 text-uppercase mb-5">Mon compte</h1>
+                <h2 class="text-primary mb-5">Dashboard</h2>
+            </div>
+
+            <div class="col-lg-6">
+                <h3 class="text-white mb-5 text-center">Informations personnelles</h3>
+
+                <div class="list-group mb-5 scrollable-400 black-list text-center">
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Nom : </span>{{ user.name }}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Prénom : </span>{{ user.firstname }}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Date de naissance : </span>{{ user.birthdate |date("m/d/Y")}}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Adresse : </span>{{ user.address }}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Adresse e-mail : </span>{{ user.email }}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Numéro de téléphone : </span>{{ user.phone }}</p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0"><span class="text-primary">Numéro de licence : </span>{{ user.license }}</p>
+                    </div>
+                </div>
+
+                {% if app.user.id == user.id %}                     
+                    <div class="row mb-4">
+                        <div class="col-lg-6">
+                            <a href="{{ path('user_edit') }}" class="btn btn-block btn-primary">Modifier mon profil</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ path('user_edit_password') }}" class="btn btn-block btn-primary">Modifier mon mot de passe</a>
+                        </div>                      
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-6">
+                <h3 class="text-white mb-5 text-center">Niveau technique</h3>
+                
+                <div class="list-group mb-5 scrollable-400 black-list text-center">
+                    <div class="list-group-item">
+                        <p class="m-0">
+                        <span class="text-primary">Mon grade : </span>
+                        {% for grade in user.grades %}
+                            {{ grade.name }}
+                        {% endfor %}
+                        </p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0">
+                        <span class="text-primary">Technique(s) à travailler : </span>
+                            <div class="row d-flex flex-row justify-content-center mt-2 mb-n3">
+                                {% for technic in user.technics %}
+                                    <div class="col-sm-2 badge badge-primary m-2 p-2">{{ technic.attack }}<br>{{ technic.title }}<br>{{ technic.side }}</div>
+                                {% endfor %}
+                            </div>
+                        </p>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="m-0">
+                        <span class="text-primary">Commentaire d'un professeur : </span>{{ user.teacherComment }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row w-100 mt-5">
+                <div class="col-lg-12">
+                    <h3 class="text-white mb-5 text-center">Co-voiturage</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="text-white mb-5 text-center text-primary">Conducteur</h4>
+                    
+                    <div class="list-group mb-5 scrollable-400 black-list text-center">
+                        {% for carsharing in user.driverCarsharings %}
+                            <div class="list-group-item">
+                                <p class="m-0">
+                                    <span class="text-primary">Départ: </span>
+                                    {{ carsharing.stageApi.date }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">À : </span>
+                                    {{ carsharing.appointmentAt|date('h:i') }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Stage : </span>
+                                    {{ carsharing.stageApi.animator }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Passagers : </span>
+                                    {% for passager in carsharing.passengers %}
+                                        {{ passager }}{% if loop != loop.last %}, {% endif %}
+
+                                    {% else %}
+                                        Aucun
+                                    {% endfor %}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Places disponible : </span>
+                                    {% if carsharing.passengers|length == carsharing.seatNumber %}
+                                        Complet
+                                    {% else %}
+                                        {{ carsharing.seatNumber - carsharing.passengers|length }}
+                                    {% endif %}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Total places : </span>
+                                    {{ carsharing.seatNumber }}
+                                </p>
+                                <p class="m-0">
+                                    <a class="confirmDeleteCarsharing" href="{{ path('carsharing_delete', {"id" : carsharing.id, "page" : "profil"}) }}" >
+                                        <span class="text-danger">Supprimer le co-voiturage</span>
+                                    </a>
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="">
+                                <p class="m-0">
+                                <span class="text-white">Pas de co-voiturage de prevu</span>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="text-white mb-5 text-center text-primary">Passager</h4>
+                    
+                    <div class="list-group mb-5 scrollable-400 black-list text-center">
+                        {% for carsharing in user.passengerCarsharings %}
+                            <div class="list-group-item">
+                                <p class="m-0">
+                                    <span class="text-primary">Départ: </span>
+                                    {{ carsharing.stageApi.date }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">À : </span>
+                                    {{ carsharing.appointmentAt|date('h:i') }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Stage : </span>
+                                    {{ carsharing.stageApi.animator }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Conducteur : </span>
+                                    {{ carsharing.driver }}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Passagers : </span>
+                                    {% for passager in carsharing.passengers %}
+                                        {{ passager }}{% if loop != loop.last %}, {% endif %}
+
+                                    {% else %}
+                                        Aucun
+                                    {% endfor %}
+                                </p>
+                                <p class="m-0">
+                                    <span class="text-primary">Places disponible : </span>
+                                    {% if carsharing.passengers|length == carsharing.seatNumber %}
+                                        Complet
+                                    {% else %}
+                                        {{ carsharing.seatNumber - carsharing.passengers|length }}
+                                    {% endif %}
+                                </p>
+                                <p class="m-0">
+                                    <a class="confirmUnjoinCarsharing" href="{{ path('carsharing_remove-place', {"id" : carsharing.id}) }}" >
+                                        <span class="text-warning">Se désinscrire</span>
+                                    </a>
+                                </p>
+                            </div>
+                        {% else %}
+                            <div class="">
+                                <p class="m-0">
+                                <span class="text-white">Pas de co-voiturage de prevu</span>
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation de suppression -->
+{% include "_partials/_modal.html.twig" %}
+
+{% endblock %}

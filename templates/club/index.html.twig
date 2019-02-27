@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le Club{% endblock %}
+
+{% block page %}
+    <section id="club" class="club-section">
+        <div class="container">
+        <h1 class="text-center mb-5">Le club</h1>
+          <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="text-white mb-4">L'Aïkido Club de Bourg-en-Bresse</h2>
+                <p class="text-white-50">est une association loi 1901, affiliée à la <a href="https://www.aikido.com.fr" target="blank">Fédération Française d'Aïkido, Aïkibudo et Affinitaire (F.F.A.A.A)</a>, membre de L'Union des Fédérations d'Aïkido (U.F.A) reconnue par le Ministère de la Jeunesse et des Sports.</p>
+                <p class="text-white-50">Le club existe depuis 1972 et compte de nombreux gradés de haut niveau.</p>
+                <p class="text-warning">Nos portes sont ouvertes tout au long de la saison les jours de cours, pour vous renseigner et/ou vous permettre d'assister à un cours</p>
+            </div>
+          </div>
+
+          <!-- schedule One Row -->
+          <h2 class="text-primary text-center">Horaires</h2>
+          <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+            <div class="col-lg-6">
+                <img class="img-fluid" src="img/aiki3.png" alt="logo aikido">
+            </div>
+            <div class="col-lg-6">
+                <div class="text-center h-100">
+                <div class="d-flex h-100">
+                    <div class="schedule-text w-100 my-auto text-center text-lg-left">
+                    <table class="table text-center text-white">
+                        <thead class="thead-black border-top-0">
+                            <tr>
+                                <th scope="col"  class="text-primary">Jour</th>
+                                <th scope="col"  class="text-primary">Pour qui ?</th>
+                                <th scope="col"  class="text-primary">Horaires</th>
+                            </tr>
+                        </thead>
+                        <tbody class="thead-black">
+                            <tr>
+                                <th scope="row">Mardi</th>
+                                <th>Débutant(e)s/Gradé(e)s</th>
+                                <th>19h30 à 20h45</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mardi</th>
+                                <th>Gradé(e)s</th>
+                                <th>20h45 à 22h00</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jeudi</th>
+                                <th>Débutant(e)s/Gradé(e)s</th>
+                                <th>19h30 à 20h45</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jeudi</th>
+                                <th>Gradé(e)s</th>
+                                <th>20h45 à 22h00</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+          </div> 
+          
+          <!-- prices Two Row -->
+          <h3 class="text-primary mt-5">Tarifs</h3>
+          <div class="row justify-content-center no-gutters mt-5">
+            <div class="col-lg-6">
+              <img class="img-fluid" src="img/aiki4.png" alt="image aikido">
+            </div>
+            <div class="col-lg-6 order-lg-first">
+              <div class=" text-center h-100">
+                <div class="d-flex h-100">
+                  <div class="club-text w-100 my-auto text-center text-lg-right">
+                    <h5 class="text-warning">Inscriptions à partir de 16 ans</h5>
+                    <p class="mb-0 text-white-50">A partir de 18 ans <span class="text-warning">155 €</span> License Fédérale comprise <br>
+                    Moins de 18 ans <span class="text-warning">125 €</span> Licence fédérale comprise</p>
+                    <ul>
+                        <li><a href="img/fiche_incription_2018_2019.pdf" target="blank">Fiche d'inscription</a></li>
+                        <li><a href="img/questionnaire_sante_ffaaa_.pdf" target="blank">Questionnaire de santé FFAAA</a></li>
+                        <li> <a href="img/assurance_note_information.pdf" target="blank">Note d'information assurance</a></li>
+                    </ul>
+                    <hr class="d-none d-lg-block mb-0 mr-0">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- teacher row -->
+          <h2 class="text-primary mt-5">Les enseignants</h2>
+          <div class="teacher mb-5 d-flex col-lg-4">
+            <div class="card teacher-card">
+                <div class="img-card">
+                    <img class="card-img-top" src="img/daniel.png" alt="Daniel Gaillard">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Daniel GAILLARD</h5>
+                    <p class="card-text text-primary">4em DAN</p>
+                    <p class="card-text">- Brevet fédéral -</p>
+                </div>
+            </div>
+            <div class="card teacher-card">
+                <div class="img-card">
+                    <img class="card-img-top" src="img/ken.png" alt="Hervé Guénard">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Hervé GUENARD</h5>
+                    <p class="card-text text-primary">6em DAN</p>
+                    <p class="card-text">- Brevet d'Etat, Diplôme d'Etat -</p>
+                    <a href="img/interview-herve.pdf" target="blank" class="btn btn-primary">Plus d'information sur Hervé GUENARD</a>
+                </div>
+            </div>
+            <div class="card teacher-card">
+                <div class="img-card">
+                    <img class="card-img-top" src="img/thierry.png" alt="Thierry Salas">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Thierry SALAS</h5>
+                    <p class="card-text text-primary">4em DAN</p>
+                    <p class="card-text">- Brevet fédéral -</p>
+                </div>
+            </div>
+          </div>
+
+          <!-- president row -->
+          <h2 class="text-primary my-5">Le président</h2>
+          <div class="president mb-5 d-flex col-lg-4">
+            <div class="card president-card">
+                <img class="card-img-top" src="img/david.jpg" alt="David Alves">
+                <div class="card-body">
+                    <h5 class="card-title">David Alves</h5>
+                    <p class="card-text text-primary">1er DAN</p>
+                </div>
+            </div>
+          </div>
+
+        </div>
+    </section>
+{% endblock %}

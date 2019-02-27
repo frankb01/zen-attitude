@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {% endblock %}
+
+{% block page %}
+
+<section class="login-section">
+        <div class="container mx-auto text-center">
+            <div class="row">
+                <h1 class="mx-auto mb-5 text-uppercase text-center">Connexion</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5 mx-auto mb-5">
+    
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                    {% endif %}
+            
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    
+                    {{ form_widget(form) }}
+    
+                    <button class="btn btn-primary mt-5">{{ button_label|default('Connexion') }}</button>
+    
+                    {{ form_end(form) }}
+                    
+                    <div class="mt-5">
+                        <a href="javascript:history.back()">Retour</a>
+                    </div>
+    
+                </div>
+            </di>
+        </div>
+</section>
+
+{% endblock %}

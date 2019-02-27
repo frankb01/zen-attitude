@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}tous les covoiturages{% endblock %}
+
+{% block page %}
+
+<div class="admin-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto mb-5 text-center">
+                {# Titre de la page #}
+                <h1 class="mx-auto mb-5 text-uppercase">Administration</h1>
+                <h2 class="text-white">Liste des Co-voiturage</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 mx-auto mb-5 text-center">
+                <div class="col-lg-6 mx-auto">
+                    <div class="form-group">
+                        <label for="search_box" class="text-white">Stage / Conducteur / Passagers / Heure / Lieux / Commentaire</label>
+                        <input id="search_box" class="form-control" type="text" placeholder="Rechercher...">
+                    </div>
+                </div>
+
+                <div class="table-responsive text-white">
+                    <table id="scrollTable" class="text-white">
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Conducteur</th>
+                                <th>Passagers</th>
+                                <th>Sièges</th>
+                                <th>Heure</th>
+                                <th>Lieux</th>
+                                <th>Commentaire</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for carsharing in carsharings %}
+                            <tr>
+                                <td>{{ carsharing.stageApi.animator }} <br> {{ carsharing.stageApi.date }}</td>
+                                <td>{{ carsharing.driver }}</td>
+                                <td>
+                                    {% for passenger in carsharing.passengers %}
+                                        <p class="m-0 text-nowrap">{{ loop.index }}-{{ passenger }}</p>
+                                    {% else %}
+                                        <p class="m-0">Aucun</p>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ carsharing.seatNumber }}</td>
+                                <td>{{ carsharing.appointmentAt|date('H:i') }}</td>
+                                <td>{{ carsharing.appointmentTo }}</td>
+                                <td>{{ carsharing.comment ? carsharing.comment : 'Aucun' }}</td>
+
+                                <td>
+                                {# la class "confirmDelete" fait référence à du js qui appelle ensuite le modal coorrespondant situé dans le fichier inclus en fin de page #}
+                                    <a class="confirmDeleteCarsharing" href="{{ path('carsharing_delete', {"id" : carsharing.id, "page" : "admin"}) }}" >
+                                        <i class="fas fa-user-times fa-2x text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-5">
+                    <a href="{{ path('carsharing_index') }}">Retour</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation de suppression -->
+{% include "_partials/_modal.html.twig" %}
+
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
+
+        <title>{% block title %}Zen Attitude{% endblock %}</title>
+        
+        {% block stylesheets %}
+            {# 
+             # Charge les fichiers css present dans public/build/entrypoints.json
+             # 'app' doit correspondre au premier argument de addEntry () 
+             # dans webpack.config.js 
+             #}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body id="page-top">
+
+        <!-- Navigation -->
+        {% include "_partials/_nav.html.twig" %}
+
+         <!-- Flash messages -->      
+        <div id="flashMessage">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <!-- Page -->
+        {% block page %}
+            
+        {% endblock %}
+
+        <!-- Footer -->
+        {% include "_partials/_footer.html.twig" %}
+
+        <!-- Modal -->
+        {% block modal %}
+        {% endblock %}
+
+        <!-- Javascripts -->
+        {% block javascripts %}
+            {# 
+             # initialiser la variable pour le toogle stages intern/extern dans la page teacher, 
+             # corrige problème teacherToggleInfo is not defined 
+             #}
+            <script>var teacherToggleInfo = "";</script>
+            
+            {# 
+             # Contient tout le JavaScript de l'entrée "app" 
+             # dans public/build/entrypoints.json
+             #}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+    </body>
+</html>

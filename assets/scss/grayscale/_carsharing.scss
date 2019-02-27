@@ -1,0 +1,22 @@
+.carsharing-section {
+    min-height: 100vh;
+    padding: 10rem 0;
+    background: $bg-gradient;
+
+    h1 {
+        font-family: 'Varela Round';
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        letter-spacing: 0.8rem;
+        background: -webkit-linear-gradient(fade-out(white, 0.1), fade-out(white, 1));
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    .black-list {
+        div.list-group {
+            background-color: transparent;
+            border-radius: 0;
+        }
+      }
+}

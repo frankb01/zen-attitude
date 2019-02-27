@@ -1,0 +1,11 @@
+<ul id="ticker01">
+    {% for news_index in news %}
+        <li>
+            <a href="{{ path('news_show', {'id': news_index.id}) }}">
+            {{ news_index.date|date("d/m/Y") ~ ' - ' ~ news_index.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+
+

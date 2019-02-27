@@ -1,0 +1,20 @@
+.news_modal {
+    text-align: center !important;
+    color: #fff;
+    background: linear-gradient(to bottom, $black 0%,#{fade-out($black, .1)} 75%,#{fade-out($black, .2)} 100%);
+    box-shadow: 2px 2px 30px rgb(184, 180, 180);
+
+    h5 {
+        font-family: 'Varela Round';
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        letter-spacing: 0.8rem;
+        background: #fff;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    li {
+        list-style-type: none;
+    }
+}

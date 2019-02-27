@@ -1,0 +1,49 @@
+.tickercontainer {
+  /* the outer div RWD */
+  @media(min-width: 768px) {
+    width: 650px;
+  }
+  @media(min-width: 992px) {
+    width: 900px;
+  }
+  height: auto;
+  margin: auto;
+  padding: 0.5rem 1rem;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.tickercontainer .mask {
+  /* that serves as a mask. so you get a sort of padding both left and right */
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+ul.newsticker {
+  /* that's your list */
+  position: relative;
+  left: 400px; // Position de départ initiale du texte dans le bandeau défilant
+  font: bold 1.5rem Verdana;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+ul.newsticker li a {
+  float: left;
+  /* important: display inline gives incorrect results when you check for elem's width */
+  margin: 0 100px 0 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.7); // Modification de la couleur de l'écriture des news sur le bandeau défilant de la page home
+}
+
+ul.newsticker li:last-child {
+  margin: 0;
+}
+
+ul.newsticker li a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+

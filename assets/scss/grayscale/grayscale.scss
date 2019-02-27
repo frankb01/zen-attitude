@@ -1,0 +1,77 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+@import 'navbar.scss';
+@import 'masthead.scss';
+@import 'buttons.scss';
+@import 'about.scss';
+@import 'club.scss';
+@import 'signup.scss';
+@import 'contact.scss';
+@import 'carsharing.scss';
+@import 'stages.scss';
+@import 'login.scss';
+@import 'aikido.scss';
+@import 'stages_accueil.scss';
+@import 'footer.scss';
+@import 'gallery.scss';
+@import 'admin.scss';
+@import 'errors.scss';
+@import 'timepicker.scss';
+@import 'news.scss';
+@import 'teacher.scss';
+@import 'user.scss';
+@import 'aikido-accueil.scss';
+@import 'news_modal.scss';
+@import 'modals.scss';
+
+body {
+  font-family: 'Nunito';
+  letter-spacing: 0.0625em;
+}
+
+a {
+  color: $primary;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: darken($primary, 20%);
+  }
+}
+
+.bg-black {
+  background-color: $black !important;
+}
+
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+footer {
+  padding: 5rem 0;
+}
+
+select, input, textarea {
+  text-align: center;
+  text-align-last: center;
+}
+
+.scrollable-200 {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.scrollable-300 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.scrollable-400 {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+
