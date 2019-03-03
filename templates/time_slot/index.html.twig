@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TimeSlot index{% endblock %}
+
+{% block page %}
+<div class="stages-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mb-5 text-center">
+                <h1>Liste des horaires de cours</h1>
+
+                <a href="{{ path('time_slot_new') }}" class="btn btn-primary">Ajouter <i class="fas fa-plus fa-2x"></i></a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Jour</th>
+                            <th>Pour qui ?</th>
+                            <th>Horaires</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for time_slot in time_slots %}
+                        <tr>
+                            <td>{{ time_slot.id }}</td>
+                            <td>{{ time_slot.day }}</td>
+                            <td>{{ time_slot.level }}</td>
+                            <td>{{ time_slot.schedule }}</td>
+                            <td>
+                                <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun horaires d'enregistés</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock %}

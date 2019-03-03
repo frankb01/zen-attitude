@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TimeSlot{% endblock %}
+
+{% block page %}
+    <h1>TimeSlot</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ time_slot.id }}</td>
+            </tr>
+            <tr>
+                <th>Day</th>
+                <td>{{ time_slot.day }}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{ time_slot.level }}</td>
+            </tr>
+            <tr>
+                <th>Schedule</th>
+                <td>{{ time_slot.schedule }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('time_slot_index') }}">back to list</a>
+
+    <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}">edit</a>
+
+    {{ include('time_slot/_delete_form.html.twig') }}
+{% endblock %}
