@@ -49,16 +49,6 @@ class TimeSlotController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="time_slot_show", methods={"GET"})
-     */
-    public function show(TimeSlot $timeSlot): Response
-    {
-        return $this->render('time_slot/show.html.twig', [
-            'time_slot' => $timeSlot,
-        ]);
-    }
-
-    /**
      * @Route("/modification/{id}", name="time_slot_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, TimeSlot $timeSlot): Response
@@ -81,15 +71,14 @@ class TimeSlotController extends AbstractController
     }
 
     /**
-     * @Route("/suppression/{id}", name="time_slot_delete", methods={"DELETE"})
+     * @Route("/suppression/{id}", name="time_slot_delete",  methods={"GET","POST"})
      */
-    public function delete(Request $request, TimeSlot $timeSlot): Response
+    public function delete(Request $request, TimeSlot $timeSlot)
     {
-        if ($this->isCsrfTokenValid('delete'.$timeSlot->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($timeSlot);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($timeSlot);
+        $entityManager->flush();
+        $this->addFlash('success', 'Plage horaire supprimée.');
 
         return $this->redirectToRoute('time_slot_index');
     }

@@ -1,47 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TimeSlot index{% endblock %}
+{% block title %}Plages horaires{% endblock %}
 
 {% block page %}
-<div class="stages-section justify-content-center">
+<div class="timeslot-section justify-content-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto mb-5 text-center">
-                <h1>Liste des horaires de cours</h1>
+                <h1 class="mb-5">Liste des horaires de cours</h1>
 
-                <a href="{{ path('time_slot_new') }}" class="btn btn-primary">Ajouter <i class="fas fa-plus fa-2x"></i></a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Jour</th>
-                            <th>Pour qui ?</th>
-                            <th>Horaires</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for time_slot in time_slots %}
-                        <tr>
-                            <td>{{ time_slot.id }}</td>
-                            <td>{{ time_slot.day }}</td>
-                            <td>{{ time_slot.level }}</td>
-                            <td>{{ time_slot.schedule }}</td>
-                            <td>
-                                <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}">Modifier</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5">Aucun horaires d'enregistés</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <a href="{{ path('time_slot_new') }}" class="btn btn-primary mb-5">Ajouter <i class="fas fa-calendar-plus fa-2x"></i></a>
+                <div class="table-responsive text-white">
+                    <table  class="text-white mb-5">
+                        <thead>
+                            <tr>
+                                <th>Jour</th>
+                                <th>Pour qui ?</th>
+                                <th>Horaires</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for time_slot in time_slots %}
+                            <tr>
+                                <td>{{ time_slot.day }}</td>
+                                <td>{{ time_slot.level }}</td>
+                                <td>{{ time_slot.schedule }}</td>
+                                <td>
+                                    <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}"><i class="fas fa-user-edit fa-2x text-warning"></i></a>
+                                </td>
+                                <td>
+                                    {# la class "confirmDeleteTimeSlot" fait référence à du js qui appelle ensuite le modal correspondant situé dans le fichier inclus en fin de page #}
+                                    <a class="confirmDeleteTimeSlot" href="{{ path('time_slot_delete', {'id': time_slot.id}) }}"><i class="fas fa-user-times fa-2x text-danger"></i></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Aucun horaires enregistés</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a class="text-primary" href="{{ path('admin_index') }}">Retour</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
     
+{% endblock %}
+
+{% block modal %}
+
+<!-- Inclusion du modal de confirmation de suppression -->
+{% include "_partials/_modal.html.twig" %}
+
 {% endblock %}

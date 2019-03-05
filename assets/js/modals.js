@@ -68,4 +68,16 @@
         window.location.href = theHREF;
     });
 
+    // Modal timeSlot
+    $(".confirmDeleteTimeSlot").click(function (e) {
+        e.preventDefault();
+        theHREF = $(this).attr("href");
+        $("#confirmDeleteModalTimeSlot").modal("show");
+    });
+
+    $("#confirmDeleteTimeSlotYes").click(function (e) {
+        window.location.href = theHREF;
+    });
+
+
 })(jQuery)

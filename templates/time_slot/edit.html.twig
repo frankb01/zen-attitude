@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit TimeSlot{% endblock %}
+{% block title %}Modification horaires{% endblock %}
 
 {% block page %}
-    <h1>Edit TimeSlot</h1>
+<div class="timeslot-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mb-5 text-center">
+                <h1>Modifier la plage horaire</h1>
 
-    {{ include('time_slot/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('time_slot/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('time_slot_index') }}">back to list</a>
+                <a class="mt-5" href="{{ path('time_slot_index') }}">Retour</a>
 
-    {{ include('time_slot/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

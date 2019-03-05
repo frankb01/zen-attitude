@@ -34,26 +34,14 @@
                             </tr>
                         </thead>
                         <tbody class="thead-black">
-                            <tr>
-                                <th scope="row">Mardi</th>
-                                <th>Débutant(e)s/Gradé(e)s</th>
-                                <th>19h30 à 20h45</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">Mardi</th>
-                                <th>Gradé(e)s</th>
-                                <th>20h45 à 22h00</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">Jeudi</th>
-                                <th>Débutant(e)s/Gradé(e)s</th>
-                                <th>19h30 à 20h45</th>
-                            </tr>
-                            <tr>
-                                <th scope="row">Jeudi</th>
-                                <th>Gradé(e)s</th>
-                                <th>20h45 à 22h00</th>
-                            </tr>
+                            {% for timeSlot in time_slots %}
+                            {% dump(time_slots) %}
+                                <tr>
+                                    <th scope="row">{{ timeSlot.day }}</th>
+                                    <th class="text-warning">{{ timeSlot.level }}</th>
+                                    <th>{{ timeSlot.schedule }}</th>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                     </div>
