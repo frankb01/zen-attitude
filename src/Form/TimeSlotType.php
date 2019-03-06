@@ -30,6 +30,9 @@ class TimeSlotType extends AbstractType
                 'label_attr' => [
                     'class' => 'text-primary'
                 ],
+                'attr' => [
+                    'placeholder' => 'Ex:Débutan(e)s/Gradé(e)s'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir qui peut assister à ce cours (gradés ou débutants)'
@@ -40,6 +43,9 @@ class TimeSlotType extends AbstractType
                 'label' => 'horaires',
                 'label_attr' => [
                     'class' => 'text-primary'
+                ],
+                'attr' => [
+                    'placeholder' => 'Ex: 8h45 à 20h30',
                 ],
                 'constraints' => [
                     new NotBlank([
