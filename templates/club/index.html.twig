@@ -61,8 +61,11 @@
                 <div class="d-flex h-100">
                   <div class="club-text w-100 my-auto text-center text-lg-right">
                     <h5 class="text-warning">Inscriptions à partir de 16 ans</h5>
-                    <p class="mb-0 text-white-50">A partir de 18 ans <span class="text-warning">155 €</span> License Fédérale comprise <br>
-                    Moins de 18 ans <span class="text-warning">125 €</span> Licence fédérale comprise</p>
+                    {% for membership in memberships %}
+                        
+                        <p class="mb-0 text-white-50">{{ membership.age }} <span class="text-warning">{{ membership.price }} €</span> License Fédérale comprise</p>
+
+                    {% endfor %}
                     <ul>
                         <li><a href="img/fiche_incription_2018_2019.pdf" target="blank">Fiche d'inscription</a></li>
                         <li><a href="img/questionnaire_sante_ffaaa_.pdf" target="blank">Questionnaire de santé FFAAA</a></li>

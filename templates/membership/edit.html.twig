@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Membership{% endblock %}
+{% block title %}Modification tarif{% endblock %}
 
-{% block body %}
-    <h1>Edit Membership</h1>
+{% block page %}
+<div class="stages-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mb-5 text-center">
+                <h1>Modification d'un tarif de cotisation</h1>
 
-    {{ include('membership/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('membership/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('membership_index') }}">back to list</a>
+                <a href="{{ path('membership_index') }}">Retour</a>
 
-    {{ include('membership/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

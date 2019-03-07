@@ -7,12 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto mb-5 text-center">
-                <h1 class="mb-5">Liste des horaires de cours</h1>
+                <h1 class="mx-auto my-0 text-uppercase mb-5">Administration</h1>
+                <h2 class="text-primary mb-5">Liste des horaires de cours</h2>
 
                 <a href="{{ path('time_slot_new') }}" class="btn btn-primary mb-5">Ajouter <i class="fas fa-calendar-plus fa-2x"></i></a>
-                <div class="table-responsive text-white">
+                <div class="table text-white">
                     <table  class="text-white mb-5">
-                        <thead>
+                        <thead class="text-primary">
                             <tr>
                                 <th>Jour</th>
                                 <th>Pour qui ?</th>
@@ -28,11 +29,11 @@
                                 <td>{{ time_slot.level }}</td>
                                 <td>{{ time_slot.schedule }}</td>
                                 <td>
-                                    <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}"><i class="fas fa-user-edit fa-2x text-warning"></i></a>
+                                    <a href="{{ path('time_slot_edit', {'id': time_slot.id}) }}"><i class="fas fa-edit fa-2x text-warning"></i></a>
                                 </td>
                                 <td>
                                     {# la class "confirmDeleteTimeSlot" fait référence à du js qui appelle ensuite le modal correspondant situé dans le fichier inclus en fin de page #}
-                                    <a class="confirmDeleteTimeSlot" href="{{ path('time_slot_delete', {'id': time_slot.id}) }}"><i class="fas fa-user-times fa-2x text-danger"></i></a>
+                                    <a class="confirmDeleteTimeSlot" href="{{ path('time_slot_delete', {'id': time_slot.id}) }}"><i class="fas fa-trash-alt fa-2x text-danger"></i></a>
                                 </td>
                             </tr>
                         {% else %}

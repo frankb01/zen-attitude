@@ -79,5 +79,17 @@
         window.location.href = theHREF;
     });
 
+    // Modal membership
+    $(".confirmDeleteMembership").click(function (e) {
+        e.preventDefault();
+        theHREF = $(this).attr("href");
+        $("#confirmDeleteModalMembership").modal("show");
+    });
+
+    $("#confirmDeleteMembershipYes").click(function (e) {
+        window.location.href = theHREF;
+    });
+
+
 
 })(jQuery)

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/membership")
+ * @Route("/admin/tarifs")
  */
 class MembershipController extends AbstractController
 {
@@ -26,7 +26,7 @@ class MembershipController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="membership_new", methods={"GET","POST"})
+     * @Route("/ajout", name="membership_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,17 +49,7 @@ class MembershipController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="membership_show", methods={"GET"})
-     */
-    public function show(Membership $membership): Response
-    {
-        return $this->render('membership/show.html.twig', [
-            'membership' => $membership,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="membership_edit", methods={"GET","POST"})
+     * @Route("/modification/{id}", name="membership_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Membership $membership): Response
     {
@@ -81,15 +71,14 @@ class MembershipController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="membership_delete", methods={"DELETE"})
+     * @Route("/suppression/{id}", name="membership_delete", methods={"GET","POST"})
      */
-    public function delete(Request $request, Membership $membership): Response
+    public function delete(Request $request, Membership $membership)
     {
-        if ($this->isCsrfTokenValid('delete'.$membership->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($membership);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($membership);
+        $entityManager->flush();
+        $this->addFlash('success', 'Tarif cotisation supprimé.');
 
         return $this->redirectToRoute('membership_index');
     }

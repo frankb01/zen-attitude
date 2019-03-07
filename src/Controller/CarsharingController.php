@@ -140,7 +140,7 @@ class CarsharingController extends AbstractController
         $em->remove($carsharing);
         $em->flush();
 
-        $this->addFlash('success', 'le co-voiture à bien été supprimé');
+        $this->addFlash('success', 'le co-voiturage à bien été supprimé');
 
         if ($page == "admin") {
             return $this->redirectToRoute('carsharing_show-all');

@@ -169,3 +169,24 @@
         </div>
     </div>
 </div>
+
+{# <!-- Modal de confirmation de suppression : appel via js par la class="confirmDelete" --> #}
+<div class="modal fade" id="confirmDeleteModalMembership" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-section">
+                <div class="modal-header">
+                    <h5 class="modal-title mx-auto">Confirmation de la suppression</h5>
+                    {# <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span>&times;</span>
+                    </button> #}
+                </div>
+                <div class="modal-body text-warning">
+                    <p>Etes-vous sûr de vouloir supprimer ce tarif ?</p>
+                </div>
+                <div class="modal-footer mx-auto">
+                    <a class="btn btn-danger text-white" id="confirmDeleteMembershipYes">Oui</a>
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Non</button>
+                </div>
+            </div>
+        </div>
+    </div>

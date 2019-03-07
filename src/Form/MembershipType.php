@@ -6,6 +6,8 @@ use App\Entity\Membership;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class MembershipType extends AbstractType
 {
@@ -18,11 +20,22 @@ class MembershipType extends AbstractType
                     'Moins de 18 ans' => 'Moins de 18 ans',
                     'A partir de 18 ans' => 'A partir de 18 ans',
                 ],
+                'label_attr' => [
+                    'class' => 'text-primary'
+                ],
                 'attr' => [
                     'class' => 'dropdown'
                 ],
             ])
-            ->add('price')
+            ->add('price', IntegerType::class, [
+                'label' => 'Tarif',
+                'label_attr' => [
+                    'class' => 'text-primary'
+                ],
+                'attr' => [
+                    'placeholder' => 'Entrer le montant de la cotisation'
+                 ],
+             ])
         ;
     }
 
