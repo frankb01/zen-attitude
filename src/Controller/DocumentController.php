@@ -39,6 +39,7 @@ class DocumentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $document->getPath();
+            // dd($file);
 
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 

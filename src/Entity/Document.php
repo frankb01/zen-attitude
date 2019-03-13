@@ -31,6 +31,11 @@ class Document
      */
     private $createdAt;
 
+    public function __construct() {
+        $this->setCreatedAt(new \DateTime());
+    }
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,12 +53,12 @@ class Document
         return $this;
     }
 
-    public function getPath(): ?string
+    public function getPath()
     {
         return $this->path;
     }
 
-    public function setPath(string $path): self
+    public function setPath($path): self
     {
         $this->path = $path;
 
