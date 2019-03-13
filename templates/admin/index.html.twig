@@ -39,10 +39,18 @@
                     </div>
 
                     <div class="col-lg-6 mb-5  black-list">
-                            <h4 class="text-primary">Tarifs cotisation</h4>
+                        <h4 class="text-primary">Tarifs cotisation</h4>
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action text-white" href="{{ path('membership_new') }}">Ajouter un tarif de cotisation</a>
+                            <a class="list-group-item list-group-item-action text-white" href="{{ path('membership_index') }}">Afficher la liste des tarifs</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-5  black-list">
+                            <h4 class="text-primary">Documents club</h4>
                             <div class="list-group">
-                                <a class="list-group-item list-group-item-action text-white" href="{{ path('membership_new') }}">Ajouter un tarif de cotisation</a>
-                                <a class="list-group-item list-group-item-action text-white" href="{{ path('membership_index') }}">Afficher la liste des tarifs</a>
+                                <a class="list-group-item list-group-item-action text-white" href="{{ path('document_new') }}">Ajouter un Document</a>
+                                <a class="list-group-item list-group-item-action text-white" href="{{ path('document_index') }}">Afficher la liste des Documents</a>
                             </div>
                         </div>
 

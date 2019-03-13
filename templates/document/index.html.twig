@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document index{% endblock %}
+
+{% block page %}
+    <h1>Document index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Chemin</th>
+                <th>Date de création</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.title }}</td>
+                <td>{{ document.path }}</td>
+                <td>{{ document.createdAt ? document.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('document_edit', {'id': document.id}) }}"><i class="fas fa-edit fa-2x text-warning"></i></a>
+                </td>
+                <td>
+                    <a href="{{ path('document_delete', {'id': document.id}) }}"><i class="fas fa-trash-alt fa-2x text-danger"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun document trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

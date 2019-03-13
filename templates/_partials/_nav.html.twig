@@ -69,11 +69,11 @@
                             <a class="dropdown-item" href="{{ path('gallery_index') }}">Galerie</a>
                             {% if is_granted('ROLE_TEACHER') %}
                             {# Lien vers la classe : #}
-                            <a class="dropdown-item" href="{{ path('teacher_index') }}">Senseï</a>
+                            <a class="dropdown-item" href="{{ path('teacher_index') }}">Professeur</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
                             {# Lien vers la classe : #}
-                            <a class="dropdown-item" href="{{ path('admin_index') }}">Admin</a>
+                            <a class="dropdown-item" href="{{ path('admin_index') }}">Administration</a>
                             {% endif %}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('logout')}}">Déconnexion</a>
