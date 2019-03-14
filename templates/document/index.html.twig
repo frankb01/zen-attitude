@@ -1,39 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document index{% endblock %}
+{% block title %}Liste des documents{% endblock %}
 
 {% block page %}
-    <h1>Document index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Chemin</th>
-                <th>Date de création</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for document in documents %}
-            <tr>
-                <td>{{ document.title }}</td>
-                <td>{{ document.path }}</td>
-                <td>{{ document.createdAt ? document.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('document_edit', {'id': document.id}) }}"><i class="fas fa-edit fa-2x text-warning"></i></a>
-                </td>
-                <td>
-                    <a href="{{ path('document_delete', {'id': document.id}) }}"><i class="fas fa-trash-alt fa-2x text-danger"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Aucun document trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="timeslot-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mb-5 text-center">
+                <h1 class="mx-auto my-0 text-uppercase mb-5">Administration</h1>
+                <h2 class="text-primary mb-5">Liste des documents club</h2>
+                <a href="{{ path('document_new') }}" class="btn btn-primary mb-5">Ajouter <i class="fas fa-plus fa-2x"></i></a>
+                <table class="table mb-5 text-white">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Chemin</th>
+                            <th>Date de création</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for document in documents %}
+                        <tr>
+                            <td>{{ document.title }}</td>
+                            <td>{{ document.path }}</td>
+                            <td>{{ document.createdAt ? document.createdAt|date('d-m-Y') : '' }}</td>
+                            <td>
+                                <a href="{{ path('document_edit', {'id': document.id}) }}"><i class="fas fa-edit fa-2x text-warning"></i></a>
+                            </td>
+                            <td>
+                                <a href="{{ path('document_delete', {'id': document.id}) }}"><i class="fas fa-trash-alt fa-2x text-danger"></i></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun document trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
     
 {% endblock %}
