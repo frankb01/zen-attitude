@@ -90,6 +90,17 @@
         window.location.href = theHREF;
     });
 
+    // Modal document
+    $(".confirmDeleteDocument").click(function (e) {
+        e.preventDefault();
+        theHREF = $(this).attr("href");
+        $("#confirmDeleteModalDocument").modal("show");
+    });
+
+    $("#confirmDeleteDocumentYes").click(function (e) {
+        window.location.href = theHREF;
+    });
+
 
 
 })(jQuery)

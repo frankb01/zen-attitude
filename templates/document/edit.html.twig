@@ -3,11 +3,20 @@
 {% block title %}Modifier un document{% endblock %}
 
 {% block page %}
-    <h1>Administration</h1>
-    <h2>Modifier un document</h2>
 
-    {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="stages-section justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto mb-5 text-center">
+                <h1>Administration</h1>
+                <h2 class="text-primary mb-5">Modifier un document</h2>
 
-    <a href="{{ path('document_index') }}">Retour</a>
+                {{ include('document/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+                <a href="{{ path('document_index') }}">Retour</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -7,13 +7,14 @@ use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
- * @Route("/document")
+ * @Route("/admin/document")
  */
 class DocumentController extends AbstractController
 {
@@ -72,10 +73,51 @@ class DocumentController extends AbstractController
      */
     public function edit(Request $request, Document $document): Response
     {
+        $oldPath = $document->getPath();
+
+        if(!empty($oldPath)) {
+            $document->setPath(
+                new File($this->getParameter('media_directory').'/'.$oldPath)
+            );
+        }
+
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //si je souhaite setté un nouveau path pour un media existant => meme procedure que pour new
+            if(!is_null($document->getPath())){
+
+                $file = $document->getPath();
+            
+                $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('media_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+                
+                //je stocke le nouveau nom de fichier
+                $document->setPath($fileName);
+
+                //si je remplace mon ancien document par une nouveau , je teste dans un premier temps si il y en avait deja une à supprimer ;)
+                if(!empty($oldPath)){
+                    //fonction native a php qui supprime des fichiers
+                    unlink(
+                        $this->getParameter('media_directory') .'/'.$oldPath
+                    );
+                }
+
+            } else { //sinon je garde l'ancienne valeur que j'avais deja en BDD
+                $document->setPath($oldPath);//ancien nom de fichier
+            }
+            
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('document_index', [
@@ -94,11 +136,16 @@ class DocumentController extends AbstractController
      */
     public function delete(Request $request, Document $document): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($document);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($document);
+        $entityManager->flush();
+        
+        // je récupère le nom de mon fichier en bdd
+        $fileName = $document->getPath();
+        // j'efface le fichier uploadé dans public/uploads/media
+        unlink($this->getParameter('media_directory') .'/'.$fileName);
+        
+        $this->addFlash('success', 'Le document a bien été supprimé');
 
         return $this->redirectToRoute('document_index');
     }
