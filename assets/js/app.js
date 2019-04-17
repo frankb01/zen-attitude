@@ -59,7 +59,7 @@ $(document).ready(function() {
     });
 
     // news text defilant
-    $(function(){ $("ul#ticker01").liScroll({travelocity: 0.12}); });
+    $(function(){ $("ul#ticker01").liScroll({travelocity: 0.08}); });
 
     // alignement des items de la nav
     $('#mainNav .collapse.navbar-collapse .nav-item .nav-link span').attr('style','vertical-align:-webkit-baseline-middle;');
