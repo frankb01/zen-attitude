@@ -78,7 +78,8 @@ class AdminEditMemberType extends AbstractType
                         'max' => 18
                     ]),
                     new Regex([
-                        'pattern' => "/^[^a-zA-Z][0-9 . ]+/"
+                        'pattern' => "/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/", //regex pour sécuriser le numéro de téléphone
+                        'message' => 'Veuillez entrer un numéro de téléphone valide'
                     ]),
                 ]
             ])
