@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
 
-        <title>{% block title %}Zen Attitude{% endblock %}</title>
-        
+        <title>{% block title %}Aikido Club de Bourg-en-Bresse{% endblock %}</title>
+        <meta name="Description" content={% block description %}"L'Aikido club de Bourg-en-Bresse(ACB) est une association loi 1901, affiliée à la Fédération Française d'Aikido, Aikibudo et Affinitaire (F.F.A.A.A).L'ACB vous propose des cours, dispensés par de hauts gradés, ouverts à tous à partir de 16 ans"{% endblock %}>
+
         {% block stylesheets %}
             {# 
              # Charge les fichiers css present dans public/build/entrypoints.json
