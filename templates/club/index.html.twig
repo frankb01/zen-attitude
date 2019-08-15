@@ -36,7 +36,6 @@
                         </thead>
                         <tbody class="thead-black">
                             {% for timeSlot in time_slots %}
-                            {% dump(time_slots) %}
                                 <tr>
                                     <th scope="row">{{ timeSlot.day }}</th>
                                     <th class="text-warning">{{ timeSlot.level }}</th>

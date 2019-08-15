@@ -63,8 +63,8 @@ class GalleryController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'L\'image a été enregistré');
 
-
-            return $this->redirect($this->generateUrl('gallery_index'));
+            return $this->redirectToRoute('gallery_index');
+            //return $this->redirect($this->generateUrl('gallery_index'));
         }
 
         return $this->render('gallery/new.html.twig', [
