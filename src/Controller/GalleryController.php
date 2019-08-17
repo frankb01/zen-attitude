@@ -42,7 +42,6 @@ class GalleryController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $media->getUrl();
 
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
