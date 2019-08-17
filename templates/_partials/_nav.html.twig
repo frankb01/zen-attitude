@@ -49,6 +49,13 @@
                     <span>Galerie</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'carsharing_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#carsharing' : path('carsharing_index') }}">
+                    <span>Covoiturage</span>
+                    </a>
+                </li>
                 {% endif %}
                 <li class="nav-item">
                     <a 
@@ -74,7 +81,6 @@
 
                             {# Lien vers Mon profile : #}
                             <a class="dropdown-item" href="{{ path('user_dashboard') }}">Profil</a>
-                            <a class="dropdown-item" href="{{ path('carsharing_index') }}">Co-voiturage</a>
                             {% if is_granted('ROLE_TEACHER') %}
                             {# Lien vers la classe : #}
                             <a class="dropdown-item" href="{{ path('teacher_index') }}">Professeur</a>
