@@ -47,7 +47,7 @@ class MediaNewType extends AbstractType
                     'class' => 'text-primary'
                 ],
                 'attr' => [
-                    'placeholder' => 'Insérer un titre explicite (ex: irimi nage, Hervé en action, etc ...)'
+                    'placeholder' => 'Insérer un titre explicite (ex: irimi nage, Thier en action, etc ...)'
                 ],
                 'constraints' => new NotBlank([
                     'message' => 'Veuillez saisir un titre de photo'
