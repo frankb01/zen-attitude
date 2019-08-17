@@ -33,7 +33,7 @@
                     href="{{ app.request.pathInfo == "/" ? '#projects' : path('aikido_index') }}">
                     <span>Aïkido</span>
                     </a>
-                </li>
+                </li>               
                 <li class="nav-item">
                     <a 
                     class="nav-link js-scroll-trigger {{ current_path == 'stage_index' ? 'active' : '' }}" 
@@ -41,6 +41,22 @@
                     <span>Stages</span>
                     </a>
                 </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'gallery_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#gallery' : path('gallery_index') }}">
+                    <span>Galerie</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                    class="nav-link js-scroll-trigger {{ current_path == 'carsharing_index' ? 'active' : '' }}" 
+                    href="{{ app.request.pathInfo == "/" ? '#carsharing' : path('carsharing_index') }}">
+                    <span>Covoiturage</span>
+                    </a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
                     <a 
                     class="nav-link js-scroll-trigger" 
@@ -65,8 +81,6 @@
 
                             {# Lien vers Mon profile : #}
                             <a class="dropdown-item" href="{{ path('user_dashboard') }}">Profil</a>
-                            <a class="dropdown-item" href="{{ path('carsharing_index') }}">Co-voiturage</a>
-                            <a class="dropdown-item" href="{{ path('gallery_index') }}">Galerie</a>
                             {% if is_granted('ROLE_TEACHER') %}
                             {# Lien vers la classe : #}
                             <a class="dropdown-item" href="{{ path('teacher_index') }}">Professeur</a>

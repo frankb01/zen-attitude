@@ -1,4 +1,9 @@
 .projects-section {
     padding: 10rem 0;
     background: -webkit-linear-gradient(fade-out(white, 0.1), fade-out(white, 1));
+    hr {
+        border-color: $primary;
+        border-width: .25rem;
+        width: 30%;
+      }
 }
