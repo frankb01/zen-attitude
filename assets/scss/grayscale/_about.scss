@@ -15,4 +15,9 @@
     -webkit-background-clip: text;
     padding-bottom: 1.5rem;
   }
+  hr {
+    border-color: $primary;
+    border-width: .25rem;
+    width: 30%;
+  }
 }

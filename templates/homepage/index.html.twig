@@ -27,10 +27,11 @@
         <div class="col-lg-8 mx-auto">
           <h1>L'Aïkido Club de Bourg-en-Bresse</h1>
           <p class="text-white-50">est une association loi 1901, affiliée à la <a href="https://www.aikido.com.fr" target="blank">Fédération Française d'Aïkido, Aïkibudo et Affinitaire (F.F.A.A.A)</a>, membre de L'Union des Fédérations d'Aïkido (U.F.A) reconnue par le Ministère de la Jeunesse et des Sports.</p>
-            <a href="{{ path('club_index') }}">Infos, horaires et tarifs</a>
-          </div>
+          <a href="{{ path('club_index') }}">Infos, horaires et tarifs</a>
+          <hr class="d-none d-lg-block mb-0 ml-0 mx-auto">
         </div>
-        <img src="img/logo_rounded2.png" alt="logo du club" class="img-fluid mx-auto mt-3 mb-5">
+      </div>
+      <img src="img/logo_rounded2.png" alt="logo du club" class="img-fluid mx-auto mt-3 mb-5">
     </div>
   </section>
 
@@ -47,6 +48,7 @@
             <h4>L'Aïkido, un Art martial sans compétition</h4>
             <p class="text-black-50 mb-1.5">Accessible à toutes et à tous, sans tenir compte de l'âge, de la morphologie, des origines sociales ou professionnelles.</p>
             <a href="{{ path('aikido_index') }}">En Savoir plus</a>
+            <hr class="d-none d-lg-block mb-0 ml-0">
           </div>
         </div>
       </div>
@@ -95,6 +97,7 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
               <a href="{{ path('gallery_index') }}">Voir la galerie</a>
             {% endif %}
+            <hr class="d-none d-lg-block mb-0 ml-0">
           </div>
         </div>
       </div>
