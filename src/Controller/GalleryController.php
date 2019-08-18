@@ -33,29 +33,34 @@ class GalleryController extends AbstractController
     public function new(Request $request)
     {
 
-        $media = new Media();
-        $form = $this->createForm(MediaNewType::class, $media);
+        $newMedia = new Media();
+        $form = $this->createForm(MediaNewType::class, $newMedia);
         $form->handleRequest($request);
 
-        if ( $media->getCaption() == '' ) {
-            $media->setCaption('Légende non renseignée');
+        if ( $newMedia->getCaption() == '' ) {
+            $newMedia->setCaption('Légende non renseignée');
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $media = $form->getData();
+
             $file = $media->getUrl();
 
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            if(!is_null($media->getUrl())) {
 
-            try {
-                $file->move(
-                    $this->getParameter('media_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                dump($e);
+                $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('media_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    dump($e);
+                }
+
+                $media->setUrl($fileName);
             }
-
-            $media->setUrl($fileName);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($media);
