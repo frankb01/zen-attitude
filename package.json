@@ -20,7 +20,7 @@
         "datatables.net-bs4": "^1.10.19",
         "datatables.net-dt": "^1.10.19",
         "gijgo": "^1.9.11",
-        "jquery": "^3.3.1",
+        "jquery": "^3.5.0",
         "jquery.easing": "^1.4.1",
         "mustache": "^3.0.1",
         "popper.js": "^1.14.7"
